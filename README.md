@@ -25,8 +25,9 @@ BrightMinds is an AI-powered career guidance platform designed to help students 
 ## 📂 Project Structure
 
 BrightMinds/
-│── frontend/
-│── backend/
-│── database/
-│── README.md
+│
+├── frontend/
+├── backend/
+├── database/
+└── README.md
 
