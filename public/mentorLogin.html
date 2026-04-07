@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor Login | HelpingHands</title>
+
+<style>
+:root {
+  --bg:#f5f3ff;
+  --primary:#7c3aed;
+  --secondary:#5b21b6;
+  --text:#2e1065;
+}
+
+body {
+  margin:0;
+  font-family:'Times New Roman', Times, serif;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+.card {
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  width:350px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+h2 {
+  color:var(--primary);
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+button {
+  width:100%;
+  padding:10px;
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover {
+  background:var(--secondary);
+}
+
+a {
+  display:block;
+  margin-top:10px;
+  color:var(--primary);
+  text-decoration:none;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Mentor Login 💜</h2>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Enter Email" required>
+    <input type="password" id="password" placeholder="Enter Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <a href="mentorSignup.html">Don't have an account? Signup</a>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    const res = await fetch('/api/mentorLogin', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,password})
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+      alert('Login Successful');
+      window.location.href = 'mentor-dashboard.html';
+    } else {
+      alert(data.msg || 'Login failed');
+    }
+  } catch(err){
+    alert('Server error');
+  }
+});
+</script>
+
+</body>
+</html>

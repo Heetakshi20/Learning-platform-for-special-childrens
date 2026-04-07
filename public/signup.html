@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HelpingHands | Sign Up</title>
+  <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 🎈 Animated Background Bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <!-- 👧 Cartoon Character -->
+  <div class="cartoon-box">
+    <img src="img/img13.jpg" class="character" alt="Character">
+    <div class="speech">Hi! Create your account 🐍</div>
+  </div>
+
+  <!-- 📝 Sign Up Box -->
+  <div class="container">
+    <h2>Student Sign Up</h2>
+    <form action="/signup" method="POST">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <select name="diagnosis" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; outline: none; font-size: 16px;">
+        <option value="" disabled selected>Select Condition / Profile</option>
+        <option value="ADHD">ADHD</option>
+        <option value="Dyslexia">Dyslexia</option>
+        <option value="Autism">Autism</option>
+        <option value="Down Syndrome">Down Syndrome</option>
+        <option value="Dysgraphia">Dysgraphia</option>
+      </select>
+      <button type="submit">Sign Up as Student</button>
+  </form>
+
+    <div class="toggle">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+
+</body>
+</html>

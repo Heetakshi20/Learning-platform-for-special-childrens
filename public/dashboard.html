@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HelpingHands | Dashboard</title>
+  <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/opendyslexic');
+    :root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --accent: #0D5791;
+  --muted: #6b7280;
+  --success: #16a34a;
+  --radius: 12px;
+  --maxw: 1200px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #0f172a;
+}
+
+/* App Container */
+.app {
+  margin: 24px auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 18px;
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  font-size: 26px;
+  color: white;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #7CE04A;
+}
+
+/* Navigation */
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: background 0.2s;
+}
+
+.nav a:hover {
+  background: #357dc0;
+}
+
+.nav a.active {
+  background: #80adf0;
+  color: white;
+  font-weight: bold;
+}
+
+/* Main Content */
+.main {
+  min-height: 80vh;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+  color: #0D5791;
+  margin-bottom: 15px;
+}
+
+.pname {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.condition {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Cards */
+.top-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 180px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card p {
+  margin: 6px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Panels */
+.panel {
+  background: var(--card);
+  padding: 20px;
+  width: 150vh;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+
+.panel3 {
+  background: var(--card);
+  padding: 20px;
+  width: 100vh;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+
+.panel4 {
+  background: #ffffff;
+  width: 150vh;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #aaa;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.tab {
+  padding: 12px 30px;
+  border: 1px solid #888;
+  border-bottom: none;
+  background: #eee;
+  cursor: pointer;
+  margin-right: 2px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-weight: bold;
+  font-size: 17px;
+}
+.tab.active {
+  background: #fff;
+  color: #3751ad;
+  border-bottom: 2px solid #fff;
+}
+.tabcontent {
+  border: 1px solid #888;
+  border-radius: 0 10px 10px 10px;
+  background: #dce7f5ac;
+  padding: 24px;
+  min-height: 200px;
+  font-size: 15px;
+}
+.condition-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #333;
+}
+.condition-info {
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead th {
+  background: #f8fafc;
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+tbody td {
+  padding: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+
+tbody tr:hover {
+  background: #fbfdff;
+}
+
+/* Form styles */
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #7f99ff;
+  margin-bottom: 10px;
+  color: #0a0450;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: #32cd32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #228b22;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  padding: 8px 16px;
+  font-size: 0.9em;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* Misc */
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #e0f7fa;
+  margin-left: 5px;
+}
+
+.loading {
+  text-align: center;
+  color: #0D5791;
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #c3e6cb;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1rem;
+}
+
+/* Pillars Grid */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pillar-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+}
+
+.pillar-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.pillar-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.pillar-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Themes */
+body.theme-dyslexia {
+  font-family: 'OpenDyslexic', sans-serif;
+  background-color: #FFFFE0;
+  color: #1a1a1a;
+}
+body.theme-dyslexia .pillar-card {
+  border: 4px solid #3366cc;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+body.theme-dyslexia .pillar-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #000;
+}
+body.theme-adhd, body.theme-autism {
+  background-color: #f0fdf4;
+}
+body.theme-adhd * {
+  border-radius: 16px;
+}
+body.theme-autism .pillar-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+body.theme-down-syndrome {
+  font-size: 110%;
+}
+body.theme-down-syndrome .pillar-title {
+  font-size: 24px;
+}
+body.theme-down-syndrome .pillar-icon {
+  font-size: 40px;
+}
+body.theme-dysgraphia .pillar-card {
+  background-color: #fcfcfc;
+}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>HelpingHands — Dashboard</h1>
+        <div class="sub">Overview & Progress for Child Learning</div>
+      </div>
+      <div class="flex muted small">
+        Logged in as <strong id="loggedUser">Loading...</strong>
+        <form action="/logout" method="POST" style="margin: 0 0 0 20px; display: inline;">
+        </form>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="logo">Helping<span>Hands</span></div>
+        <nav class="nav">
+          <a href="#welcome">🏠 Home</a>
+          <a href="learning.html">📝 Notes</a>
+          <a href="exam.html">📚 Assignments-Tasks</a>
+          <a href="story.html">💡 Stories</a>
+          <a href="mentorbooking.html">📅 Mentor Booking</a>
+          <a href="mywork.html">🖌️ My Work</a>
+          <a href="index.html">⚙️ Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+
+        <!-- ✅ LOADING & ERROR STATE -->
+        <div id="loadingContainer" class="loading">⏳ Loading your profile...</div>
+
+        <!-- ✅ ERROR MESSAGE -->
+        <div id="errorContainer"></div>
+
+        <!-- ✅ USER INFO - FETCHED FROM DATABASE -->
+        <div id="userInfoContainer">
+          <div class="name">Hi Welcome! <span id="childName">____</span></div><br>
+          <div class="pname">Parent Name: <span id="parentNameValue">____</span></div><br>
+          <div class="condition">Diagnosis: <span id="diagnosisValue">____</span></div><br>
+        </div>
+
+        <!-- Summary Cards -->
+        <section class="top-cards">
+          <div class="card"><h3>Stars Collected</h3><p id="stars">28</p></div>
+          <div class="card"><h3>Functional Time Spent</h3><p id="time">3h 45m</p></div>
+        </section>
+
+        <!-- Four Pillars Section -->
+        <section id="four-pillars-container" class="pillars-grid">
+          <!-- Filled by JS -->
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="notes" class="panel">
+          <h2 style="margin-top:0">Parents Feedback</h2>
+          
+          <!-- ✅ Success/Error Messages -->
+          <div id="feedbackMessage"></div>
+
+          <div class="card">
+            <form id="feedback-form">
+              <label for="parent-name">Parent Name</label>
+              <input id="parent-name" required placeholder="Enter parent name">
+
+              <label for="child-name">Child Name</label>
+              <input id="child-name" required placeholder="Enter child name">
+
+              <label for="contact">Contact No</label>
+              <input id="contact" type="tel" required placeholder="Enter contact number">
+
+              <label for="message">Feedback</label>
+              <textarea id="message" rows="4" required placeholder="Write feedback..."></textarea>
+            </form>
+          </div>
+
+          <button id="saveNoteBtn">Send Feedback</button>
+        </section>
+
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const ConditionConfig = {
+      "ADHD": {
+        theme: "theme-adhd",
+        games: { title: "Quest Mode", desc: "Short bursts, high-engagement micro-games." },
+        classroom: { title: "Task Lists & Timers", desc: "Keep track of time with visual timers." },
+        foundation: { title: "Concept Mapping", desc: "Chunked lessons with frequent brain breaks." },
+        story: { title: "Choice-based branching", desc: "Fast-paced interactive adventures." }
+      },
+      "Dyslexia": {
+        theme: "theme-dyslexia",
+        games: { title: "Word Sound Match", desc: "Focus on phonological awareness." },
+        classroom: { title: "Text-to-Speech Lessons", desc: "Audio-assisted reading materials." },
+        foundation: { title: "Decodable Readers", desc: "Multi-sensory Orton-Gillingham style." },
+        story: { title: "Audio-Sync Narratives", desc: "Immersive audiobooks with highlighted text." }
+      },
+      "Autism": {
+        theme: "theme-autism",
+        games: { title: "Logic Patterns", desc: "Predictable mechanics, sensory-friendly colors." },
+        classroom: { title: "Visual Routine Board", desc: "Clear schedules and structured routines." },
+        foundation: { title: "Social Interaction Scripts", desc: "Step-by-step predictable lessons." },
+        story: { title: "Literal/Social Stories", desc: "Clear narratives with cause-and-effect." }
+      },
+      "Down Syndrome": {
+        theme: "theme-down-syndrome",
+        games: { title: "Positive Reinforcement", desc: "Simplified mechanics with clear rewards." },
+        classroom: { title: "Step-by-Step Modeling", desc: "Visual schedules and behavior guides." },
+        foundation: { title: "Concrete Concepts", desc: "Visual-heavy foundational tasks." },
+        story: { title: "Simple Narratives", desc: "Literal language with large visual aids." }
+      },
+      "Dysgraphia": {
+        theme: "theme-dysgraphia",
+        games: { title: "Voice-Controlled Games", desc: "Minimal fine motor requirements." },
+        classroom: { title: "Speech-to-Text Tools", desc: "Focus on oral presentations." },
+        foundation: { title: "Typing Practice", desc: "Alternative motor skill development." },
+        story: { title: "Interactive Audiobooks", desc: "Rich narrative exploration." }
+      }
+    };
+
+    function renderPillars(diagnosis) {
+      let cfg = ConditionConfig[diagnosis];
+      if (!cfg) {
+        cfg = ConditionConfig["ADHD"]; // fallback
+        console.warn("Unknown diagnosis:", diagnosis, "- falling back to ADHD");
+      }
+      
+      document.body.className = cfg.theme;
+      
+      const container = document.getElementById('four-pillars-container');
+      container.innerHTML = `
+        <div class="pillar-card" onclick="alert('Opening '+this.querySelector('.pillar-title').innerText)">
+          <div class="pillar-icon">🎮</div>
+          <div class="pillar-title">${cfg.games.title}</div>
+          <div class="pillar-desc">${cfg.games.desc}</div>
+        </div>
+        <div class="pillar-card" onclick="alert('Opening '+this.querySelector('.pillar-title').innerText)">
+          <div class="pillar-icon">🏫</div>
+          <div class="pillar-title">${cfg.classroom.title}</div>
+          <div class="pillar-desc">${cfg.classroom.desc}</div>
+        </div>
+        <div class="pillar-card" onclick="alert('Opening '+this.querySelector('.pillar-title').innerText)">
+          <div class="pillar-icon">🏗️</div>
+          <div class="pillar-title">${cfg.foundation.title}</div>
+          <div class="pillar-desc">${cfg.foundation.desc}</div>
+        </div>
+        <div class="pillar-card" onclick="alert('Opening '+this.querySelector('.pillar-title').innerText)">
+          <div class="pillar-icon">📖</div>
+          <div class="pillar-title">${cfg.story.title}</div>
+          <div class="pillar-desc">${cfg.story.desc}</div>
+        </div>
+      `;
+    }
+
+    // ✅ FETCH USER PROFILE FROM DATABASE ON PAGE LOAD
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        console.log('📍 Dashboard loading...');
+        
+        const response = await fetch('/api/getUserProfile');
+        const data = await response.json();
+
+        console.log('📦 API Response:', data);
+
+        if (!response.ok) {
+          throw new Error(data.msg || 'Failed to load profile');
+        }
+
+        // ✅ Hide loading, show content
+        document.getElementById('loadingContainer').style.display = 'none';
+        document.getElementById('userInfoContainer').style.display = 'block';
+
+        // ✅ POPULATE USER DATA
+        const profile = data.profile;
+        
+        document.getElementById('loggedUser').textContent = profile.fullName || 'User';
+        document.getElementById('childName').textContent = profile.fullName || 'N/A';
+        document.getElementById('parentNameValue').textContent = profile.parentName || 'N/A';
+        document.getElementById('diagnosisValue').textContent = profile.diagnosis || 'N/A';
+
+        // Inject 4 Pillars based on Diagnosis
+        renderPillars(profile.diagnosis || '');
+
+        // Auto-fill parent name in feedback form
+        document.getElementById('parent-name').value = profile.parentName || '';
+        document.getElementById('child-name').value = profile.fullName || '';
+
+        console.log('✅ Dashboard populated with data');
+
+      } catch (error) {
+        console.error('❌ Error:', error);
+        document.getElementById('loadingContainer').style.display = 'none';
+        document.getElementById('errorContainer').innerHTML = 
+          `<div class="error">⚠️ Error: ${error.message}</div>`;
+      }
+    });
+
+
+
+    // ✅ FEEDBACK SUBMISSION
+    document.getElementById('saveNoteBtn').addEventListener('click', async function(e) {
+      e.preventDefault();
+
+      const parentName = document.getElementById('parent-name').value.trim();
+      const childName = document.getElementById('child-name').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      console.log('📝 Submitting feedback:', { parentName, childName, contact, message });
+
+      if (!parentName || !childName || !contact || !message) {
+        showFeedbackMessage('❌ Please fill all fields', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/submitFeedback', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ parentName, childName, contact, message })
+        });
+
+        const data = await response.json();
+        console.log('📦 Response from server:', data);
+
+        if (data.success) {
+          showFeedbackMessage('✅ Feedback sent successfully!', 'success');
+          
+          // Clear form
+          document.getElementById('message').value = '';
+          document.getElementById('contact').value = '';
+          
+          console.log('✅ Feedback submitted successfully');
+        } else {
+          showFeedbackMessage('❌ ' + (data.msg || 'Failed to send feedback'), 'error');
+        }
+      } catch (err) {
+        console.error('❌ Error sending feedback:', err);
+        showFeedbackMessage('❌ Error sending feedback. Please try again.', 'error');
+      }
+    });
+
+    function showFeedbackMessage(message, type) {
+      const container = document.getElementById('feedbackMessage');
+      
+      if (type === 'success') {
+        container.innerHTML = `<div class="success-message">${message}</div>`;
+      } else {
+        container.innerHTML = `<div class="error-message">${message}</div>`;
+      }
+
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        container.innerHTML = '';
+      }, 5000);
+
+      // Scroll to message
+      container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+
+  </script>
+  
+</body>
+</html>

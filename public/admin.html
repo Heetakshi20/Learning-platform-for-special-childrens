@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HelpingHands | Admin Dashboard</title>
+  <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+  <style>
+    :root {
+      --bg:#f4f4f4;
+      --card:#ffffff;
+      --accent:#dc2626;
+      --muted:#b91c1c;
+      --success:#16a34a;
+      --radius:12px;
+      --maxw:1200px;
+    }
+
+    * {
+      box-sizing:border-box;
+      font-family:'Times New Roman', Times, serif;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background:var(--bg);
+      color:#7f1d1d;
+    }
+
+    .app {
+      margin:24px auto;
+      padding:20px;
+    }
+
+    header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:18px;
+    }
+
+    h1 { font-size:20px;margin:0; }
+
+    .sub { color:var(--muted);font-size:13px; }
+
+    .layout {
+      display:grid;
+      grid-template-columns:260px 1fr;
+      gap:18px;
+      align-items: start;
+    }
+
+    .sidebar {
+      background:#dc2b2b;
+      border-radius:var(--radius);
+      padding:18px;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:18px;
+      font-size:26px;
+      color:white;
+      font-weight:bold;
+    }
+
+    .logo span { color:#7CE04A; }
+
+    .nav a {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+      border-radius:10px;
+      color:#ffffff;
+      text-decoration:none;
+      margin-bottom:6px;
+      transition:background 0.2s;
+    }
+
+    .nav a:hover { background:#fee2e2c9;color:black; }
+    .nav a.active { background:#fecaca;color:var(--accent);font-weight:bold; }
+    
+    .main { min-height:80vh; }
+
+    .top-cards {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .card {
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      flex:1;
+      min-width:200px;
+      box-shadow:0 1px 3px rgba(127,29,29,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* ✅ New Styling for Hyperlink Cards */
+    .card-link {
+      text-decoration: none;
+      display: block;
+    }
+
+    .card-link:hover .card {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 6px rgba(127,29,29,0.15);
+      background: #fffafa;
+    }
+
+    .card h3 { margin:0;font-size:13px;color:var(--muted); }
+    .card p { margin:6px 0 0;font-size:20px;font-weight:600;color:var(--accent); }
+    .card .icon-label { font-size: 11px; color: var(--muted); margin-top: 4px; display: block;}
+
+    .controls {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .search {
+      flex:1;
+      display:flex;
+      gap:8px;
+    }
+
+    .search input {
+      flex:1;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid #fee2e2;
+      font-size:14px;
+      color:#7f1d1d;
+    }
+
+    button {
+      background:var(--accent);
+      color:white;
+      padding:10px 12px;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+    }
+
+    button:hover { background:#b91c1c;color: #f4f4f4; }
+    .btn-ghost { background:transparent;color:var(--accent);border:1px solid #fee2e2; }
+
+    table {
+      width:70%;
+      border-collapse:collapse;
+      background:var(--card);
+      border-radius:12px;
+      overflow:hidden;
+    }
+
+    thead th {
+      background:#fee2e2;
+      text-align:left;
+      padding:12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    tbody td {
+      padding:12px;
+      border-top:1px solid #fecaca;
+    }
+
+    tbody tr:hover { background:#fef2f2; }
+
+    .avatar {
+      width:40px;
+      height:40px;
+      border-radius:8px;
+      background:#fed7d7;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:var(--accent);
+    }
+
+    .pill {
+      display:inline-block;
+      padding:6px 8px;
+      border-radius:999px;
+      font-size:12px;
+      background:#fee2e2;
+      color:var(--accent);
+    }
+
+    @media(max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .sidebar { position: relative; height:auto; top:auto; }
+      table { width:100%; }
+    }
+
+    .modal-backdrop {
+      position:fixed;
+      inset:0;
+      background:rgba(220,38,38,0.25);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .modal {
+      background:var(--card);
+      width:720px;
+      max-width:100%;
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 0 15px rgba(220,38,38,0.3);
+    }
+
+    .form-row { display:flex;gap:10px; }
+    .form-row>* { flex:1; }
+
+    label { display:block;font-size:13px;color:var(--muted);margin-bottom:6px; }
+
+    input, select, textarea {
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #fee2e2;
+      color:#7f1d1d;
+    }
+
+    .muted { color:var(--muted);font-size:13px; }
+    .danger { background:#fca5a5;color:#7f1d1d; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>HelpingHands — Dashboard</h1>
+        <div class="sub">Manage students, staff, activities & progress</div>
+      </div>
+      <div class="flex">
+        <div class="muted small" aria-hidden>Signed in as <strong>Admin</strong></div>
+        <button style="margin-left:12px" id="open-add">+ Add Student</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="logo">Helping<span>Hands</span></div>
+        <nav class="nav" role="navigation">
+          <a href="#" class="active">📊 Dashboard</a>
+          <a href="#students">👦 Students</a>
+          <a href="activities.html">🎨 Activities</a>
+          <a href="score.html">📊 Assignment Scores</a>
+          <a href="feedback.html">📄 Feedback</a>
+          <a href="message.html">✉️ Messages</a>
+          <a href="index.html">⚙️ Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <section class="top-cards">
+          <div class="card"><h3>Total Children</h3><p id="total-students">—</p></div>
+          <div class="card"><h3>Active Therapists</h3><p id="total-staff">—</p></div>
+          <div class="card"><h3>Open Issues</h3><p id="open-issues">—</p></div>
+        </section>
+
+        <section class="top-cards">
+          <a href="score.html" class="card-link">
+            <div class="card">
+              <h3>Assignments</h3>
+              <p>Scores 📊</p>
+              <span class="icon-label">View Results &rarr;</span>
+            </div>
+          </a>
+          <a href="feedback.html" class="card-link">
+            <div class="card">
+              <h3>Feedback</h3>
+              <p>Parents 📄</p>
+              <span class="icon-label">Read Reviews &rarr;</span>
+            </div>
+          </a>
+          <a href="message.html" class="card-link">
+            <div class="card">
+              <h3>Messages</h3>
+              <p>Inbox ✉️</p>
+              <span class="icon-label">Check Mail &rarr;</span>
+            </div>
+          </a>
+          <a href="mentor.html" class="card-link">
+            <div class="card">
+              <h3>Mentors</h3>
+              <p>Available ✅</p>
+              <span class="icon-label">Manage Staff &rarr;</span>
+            </div>
+          </a>
+        </section>
+
+        <section class="controls">
+          <div class="search">
+            <input id="search" placeholder="Search students by name, id, or diagnosis" aria-label="Search students" />
+          </div>
+          <button id="export">Export CSV</button>
+        </section>
+
+        <section id="students">
+          <h2 style="margin:0 0 10px">Students</h2>
+          <div style="margin-bottom:10px" class="muted small">Manage student profiles, assign to groups & review progress.</div>
+
+          <div style="overflow:auto;border-radius:12px">
+            <table aria-describedby="students">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Child</th>
+                  <th>Gender</th>
+                  <th>Diagnosis</th>
+                  <th>Severity</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="student-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="activities" style="margin-top:18px">
+          <h2 style="margin:0 0 10px">Quick Activity Manager</h2>
+          <div style="max-width:700px;">
+            <div class="card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+              <div style="flex:1">
+                <label class="small muted">Create new activity (visible to all students)</label>
+                <input id="activity-title" placeholder="e.g. Fine motor puzzle" />
+              </div>
+              <div><button id="create-activity">Create Activity</button></div>
+            </div>
+
+            <div id="activity-list" class="card" style="padding:10px; display:flex; flex-direction:column; gap:8px;">
+              <div class="muted small" id="activity-loading">Loading activities...</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="modal">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <h3 id="modal-title">Add Student</h3>
+          <button id="close-modal" class="btn-ghost">Close</button>
+        </div>
+        <form id="student-form">
+          <div class="form-row">
+            <div>
+              <label>Name</label>
+              <input name="name" required />
+            </div>
+            <div>
+              <label>Age</label>
+              <input name="age" type="number" min="1" required />
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:10px">
+            <div>
+              <label>Gender</label>
+              <select name="gender" required>
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label>Diagnosis</label>
+              <input name="diagnosis" placeholder="e.g. Autism, ADHD" />
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:10px">
+            <div>
+              <label>Severity</label>
+              <select name="severity" required>
+                <option value="">Select</option>
+                <option>Mild</option>
+                <option>Moderate</option>
+                <option>Severe</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:10px">
+            <label>Notes (medical / allergies)</label>
+            <textarea name="notes" rows="3"></textarea>
+          </div>
+
+          <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
+            <button type="button" class="btn-ghost" id="cancel-form">Cancel</button>
+            <button type="submit">Save Student</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let students = []; // Will be populated from database
+
+    const totalStudentsEl=document.getElementById('total-students');
+    const tableBody=document.getElementById('student-table');
+
+    // ✅ FETCH STUDENTS FROM DATABASE
+    async function loadStudentsFromDB() {
+      try {
+        console.log('📍 Loading students from database...');
+        const response = await fetch('/api/getAllStudents');
+        const data = await response.json();
+
+        if (data.success) {
+          students = data.students;
+          console.log('✅ Loaded', students.length, 'students');
+          renderTable();
+          renderSummary();
+        } else {
+          alert(data.msg || 'Failed to load students');
+        }
+      } catch (err) {
+        console.error('❌ Error loading students:', err);
+        alert('Failed to load students from database');
+      }
+    }
+
+    function renderSummary(){
+      totalStudentsEl.textContent = students.length;
+      document.getElementById('total-staff').textContent = 6;
+      document.getElementById('open-issues').textContent = 2;
+    }
+
+    function makeRow(s, idx){
+      return `
+        <tr>
+          <td>${idx+1}</td>
+          <td>
+            <div style="display:flex;gap:10px;align-items:center">
+              <div class="avatar">${s.name.split(' ').map(n=>n[0]).slice(0,2).join('')}</div>
+              <div>
+                <div style="font-weight:700">${s.name}</div>
+                <div class="small muted">${s.email || 'N/A'}</div>
+              </div>
+            </div>
+          </td>
+          <td>${s.gender || 'N/A'}</td>
+          <td>${s.diagnosis || 'N/A'}</td>
+          <td><span class="pill">${s.severity || 'N/A'}</span></td>
+          <td>
+            <button class="danger" onclick="removeStudent('${s.id}')">Delete</button>
+          </td>
+        </tr>`;
+    }
+
+    function renderTable(filter=''){
+      tableBody.innerHTML='';
+      const list = students.filter(s => 
+        (s.name + (s.email || '') + (s.diagnosis || '')).toLowerCase().includes(filter.toLowerCase())
+      );
+      
+      if(!list.length)
+        tableBody.innerHTML='<tr><td colspan="6" style="padding:20px" class="muted">No students found.</td></tr>';
+      
+      list.forEach((s,i)=>tableBody.insertAdjacentHTML('beforeend',makeRow(s,i)));
+    }
+
+    document.getElementById('search').addEventListener('input',e=>renderTable(e.target.value));
+
+    const modal=document.getElementById('modal');
+    const openAdd=document.getElementById('open-add');
+    const closeModal=document.getElementById('close-modal');
+    const cancelForm=document.getElementById('cancel-form');
+    const form=document.getElementById('student-form');
+    let editingId=null;
+
+    openAdd.addEventListener('click',()=>{editingId=null;form.reset();document.getElementById('modal-title').textContent='Add Student';modal.style.display='flex';});
+    closeModal.addEventListener('click',()=>modal.style.display='none');
+    cancelForm.addEventListener('click',()=>modal.style.display='none');
+    window.addEventListener('click',e=>{if(e.target===modal)modal.style.display='none';});
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const fd=new FormData(form);
+      const obj={
+        id:editingId||'BM-'+String(Math.floor(Math.random()*900+100)),
+        name:fd.get('name'),
+        gender:fd.get('gender'),
+        age:fd.get('age'),
+        diagnosis:fd.get('diagnosis'),
+        severity:fd.get('severity'),
+        notes:fd.get('notes')
+      };
+      if(editingId){
+        const idx=students.findIndex(x=>x.id===editingId);
+        students[idx]={...students[idx],...obj};
+      }else students.push(obj);
+      modal.style.display='none';renderSummary();renderTable();
+    });
+
+    window.openEdit=function(id){
+      const s=students.find(x=>x.id===id);if(!s)return;
+      editingId=id;document.getElementById('modal-title').textContent='Edit Student';modal.style.display='flex';
+      form.name.value=s.name;form.age.value=s.age;form.gender.value=s.gender;form.diagnosis.value=s.diagnosis;form.severity.value=s.severity;form.notes.value=s.notes||'';
+    }
+
+    // ✅ DELETE STUDENT FROM DATABASE
+    window.removeStudent = async function(id){
+      if(!confirm('Delete this student?'))return;
+      
+      try {
+        const response = await fetch(`/api/deleteStudent/${id}`, {
+          method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          console.log('✅ Student deleted');
+          await loadStudentsFromDB(); // Reload from database
+        } else {
+          alert(data.msg || 'Failed to delete student');
+        }
+      } catch (err) {
+        console.error('Error deleting student:', err);
+        alert('Failed to delete student');
+      }
+    }
+
+    // Export CSV
+    document.getElementById('export').addEventListener('click',()=>{
+      const rows=[['id','name','gender','age','diagnosis','severity'],...students.map(s=>[s.id,s.name,s.gender,s.age,s.diagnosis,s.severity])];
+      const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob=new Blob([csv],{type:'text/csv'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');a.href=url;a.download='brightmind_students.csv';a.click();URL.revokeObjectURL(url);
+    });
+
+    // ✅ ACTIVITY MANAGEMENT WITH DATABASE
+    const activityList = document.getElementById('activity-list');
+    let activities = [];
+
+    // Fetch activities from database on page load
+    async function loadActivities() {
+      try {
+        const response = await fetch('/api/getActivities');
+        const data = await response.json();
+
+        if (data.success) {
+          activities = data.activities;
+          renderActivities();
+        }
+      } catch (err) {
+        console.error('Error loading activities:', err);
+        activityList.innerHTML = '<div class="muted small">Failed to load activities</div>';
+      }
+    }
+
+    // Create activity
+    document.getElementById('create-activity').addEventListener('click', async () => {
+      const title = document.getElementById('activity-title').value.trim();
+      if (!title) return alert('Enter activity title');
+
+      try {
+        const response = await fetch('/api/createActivity', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Reload activities from database
+          await loadActivities();
+          // Clear input
+          document.getElementById('activity-title').value = '';
+          console.log('✅ Activity created');
+        } else {
+          alert(data.msg || 'Failed to create activity');
+        }
+      } catch (err) {
+        console.error('Error creating activity:', err);
+        alert('Failed to create activity');
+      }
+    });
+
+    // Render activities
+    function renderActivities() {
+      activityList.innerHTML = '';
+      if (activities.length === 0) {
+        activityList.innerHTML = '<div class="muted small">No activities created yet.</div>';
+        return;
+      }
+      activities.forEach((act, i) => {
+        const div = document.createElement('div');
+        div.style.display = 'flex';
+        div.style.justifyContent = 'space-between';
+        div.style.alignItems = 'center';
+        div.style.borderBottom = '1px solid #fee2e2';
+        div.style.padding = '6px 0';
+        div.innerHTML = `
+          <span>${i+1}. ${act.title}</span>
+          <button class="danger small" onclick="removeActivity('${act._id}')">Delete</button>
+        `;
+        activityList.appendChild(div);
+      });
+    }
+
+    // Delete activity
+    window.removeActivity = async function(activityId) {
+      if (!confirm('Delete this activity?')) return;
+
+      try {
+        const response = await fetch(`/api/deleteActivity/${activityId}`, {
+          method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Reload activities
+          await loadActivities();
+          console.log('✅ Activity deleted');
+        } else {
+          alert(data.msg || 'Failed to delete activity');
+        }
+      } catch (err) {
+        console.error('Error deleting activity:', err);
+        alert('Failed to delete activity');
+      }
+    };
+
+    // ✅ LOAD ALL DATA ON PAGE LOAD
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStudentsFromDB();
+      loadActivities();
+    });
+  </script>
+</body>
+</html>

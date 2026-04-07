@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpingHands | Blog</title>
+  <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
+  <style>
+    /* ===== General Page Styling ===== */
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
+     .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #0D5791;
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #7CE04A;
+    }
+
+   .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline-block;
+  font-size: 17px;
+}
+
+.nav-links a {
+  text-decoration: none;     /* underline hatana */
+  color: inherit;            /* parent ka color use karna */
+  padding: 8px 14px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* hover effect */
+}
+
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .nav-buttons button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .manage-btn {
+      background-color: white;
+      color: #0D5791;
+    }
+
+    .launch-btn {
+      background-color: #A1E231;
+      color: black;
+    }
+
+    /* ===== Page Title ===== */
+    .blog-title {
+      background: #00AEEF;
+      padding: 20px 40px;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    /* Breadcrumb navigation */
+    .breadcrumb {
+      text-align: right;
+      padding: 10px 40px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .breadcrumb a {
+      color: #00AEEF;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Blog Container ===== */
+    .blog-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 30px 40px;
+    }
+
+    /* Blog Card */
+    .blog-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.blog-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+.blog-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+    .blog-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+
+    .blog-content {
+      padding: 15px;
+    }
+
+    .blog-meta {
+      font-size: 14px;
+      color: #00AEEF;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .blog-meta i {
+      font-size: 14px;
+    }
+
+    .blog-content h3 {
+      font-size: 18px;
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .read-more {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid #00AEEF;
+      border-radius: 20px;
+      color: #00AEEF;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .read-more:hover {
+      background: #00AEEF;
+      color: #fff;
+    }
+    .footer {
+  background-color: #0a4a82;
+  color: white;
+  padding: 40px 20px 20px;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.footer-logo img {
+  height: 80px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+}
+
+.footer-links h4 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-social a img {
+  height: 24px;
+  margin: 0 8px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
+.footer-social {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center;   /* center horizontally */
+  gap: 12px;              /* space between icons */
+}
+
+.footer-social a {
+  color: white;
+  font-size: 2rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #178bf1;
+}
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .blog-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .blog-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<link rel="stylesheet" href="chatbot.css">
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Helping<span>Hands</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html" class="nav-item">Home</a></li>
+        <li><a href="resources.html" class="nav-item">Resources</a></li>
+        <li><a href="#" class="nav-item">Blog</a></li>
+        <li><a href="contact.html" class="nav-item">Contact Us</a></li>
+    <li><a href="about.html" class="nav-item">About Us</a></li>
+    </ul>
+    <div class="nav-buttons">
+      <button class="manage-btn" onclick="window.location.href='register.html'">
+        Register Yourself
+      </button>
+      <button class="launch-btn" onclick="window.location.href='signup.html'">
+        Sign Up / Login
+      </button>      
+    </div>
+  </nav>
+  <body>
+
+
+  <!-- Blog Container -->
+<div class="blog-container">
+  
+  <!-- Blog Card 1 -->
+  <div class="blog-card">
+    <img src="img/img16.jpeg" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 6 comments
+        <i class="fa-regular fa-calendar"></i> February 1, 2022
+      </div>
+      <h3>NGO Efforts in Rural Education</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+
+  <!-- Blog Card 2 -->
+  <div class="blog-card">
+    <img src="img/img17.jpg" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+
+  <!-- Blog Card 3 -->
+  <div class="blog-card">
+    <img src="img/img18.avif" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 5 comments
+        <i class="fa-regular fa-calendar"></i> January 1, 2022
+      </div>
+      <h3>Innovative Tools for Inclusive Classrooms</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+   <!-- Blog Card 4 -->
+    <div class="blog-card">
+    <img src="img/img19.jpg" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Needs Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+ <!-- Blog Card 5 -->
+    <div class="blog-card">
+    <img src="img/img20.webp" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Needs Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+ <!-- Blog Card 6 -->
+    <div class="blog-card">
+    <img src="img/img21.webp" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Needs Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+ <!-- Blog Card 7 -->
+    <div class="blog-card">
+    <img src="img/img22.jpg" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Needs Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+ <!-- Blog Card 8 -->
+    <div class="blog-card">
+    <img src="img/img23.webp" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Needs Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+ <!-- Blog Card 9 -->
+    <div class="blog-card">
+    <img src="img/img24.jpg" alt="Blog Image">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <i class="fa-regular fa-comments"></i> 4 comments
+        <i class="fa-regular fa-calendar"></i> January 15, 2022
+      </div>
+      <h3>Supporting Parents of Special Needs Children</h3>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </div>
+
+</div>
+
+
+      
+    </div>
+  </div>
+  <!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <img src="logo.png" alt="HelpingHands Logo">
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Games</a></li>
+          <li><a href="#">Activities</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-social">
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 HelpingHands. All rights reserved.</p>
+  </div>
+</footer>
+<div id="chatbot-placeholder"></div>
+<script>
+fetch("chatbot.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("chatbot-placeholder").innerHTML = data;
+  });
+</script>
+
+<script src="chatbot.js"></script>
+
+
+
+</body>
+</html>

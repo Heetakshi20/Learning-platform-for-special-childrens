@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor Signup | HelpingHands</title>
+
+<style>
+:root {
+  --bg:#f5f3ff;
+  --primary:#7c3aed;
+  --secondary:#5b21b6;
+  --text:#2e1065;
+}
+
+body {
+  margin:0;
+  font-family:'Times New Roman', Times, serif;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+.card {
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  width:380px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+h2 {
+  color:var(--primary);
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+button {
+  width:100%;
+  padding:10px;
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover {
+  background:var(--secondary);
+}
+
+a {
+  display:block;
+  margin-top:10px;
+  color:var(--primary);
+  text-decoration:none;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Mentor Signup 💜</h2>
+
+  <form id="signupForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <input type="text" id="specialization" placeholder="Specialization (e.g Autism Therapy)">
+    
+    <button type="submit">Signup</button>
+  </form>
+
+  <a href="mentorLogin.html">Already have an account? Login</a>
+</div>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const specialization = document.getElementById('specialization').value;
+
+  try {
+    const res = await fetch('/api/mentorSignup', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,email,password,specialization})
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+      alert('Signup Successful');
+      window.location.href = 'mentorLogin.html';
+    } else {
+      alert(data.msg || 'Signup failed');
+    }
+  } catch(err){
+    alert('Server error');
+  }
+});
+</script>
+
+</body>
+</html>

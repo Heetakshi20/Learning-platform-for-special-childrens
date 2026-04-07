@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HelpingHands | Dashboard</title>
+  <link rel="shortcut icon" href="img/logo1.png" type="image/x-icon">
+  <style>
+    :root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --accent: #0D5791;
+  --muted: #6b7280;
+  --success: #16a34a;
+  --radius: 12px;
+  --maxw: 1200px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #0f172a;
+}
+
+/* App Container */
+.app {
+  margin: 24px auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 18px;
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  font-size: 26px;
+  color: white;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #7CE04A;
+}
+
+/* Navigation */
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: background 0.2s;
+}
+
+.nav a:hover {
+  background: #357dc0;
+}
+
+.nav a.active {
+  background: #80adf0;
+  color: white;
+  font-weight: bold;
+}
+
+/* Main Content */
+.main {
+  min-height: 80vh;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+  color: #0D5791;
+  margin-bottom: 15px;
+}
+
+.pname {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.condition {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Cards */
+.top-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 180px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card p {
+  margin: 6px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Panels */
+.panel {
+  background: var(--card);
+  padding: 20px;
+  width: 150vh;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+
+.panel3 {
+  background: var(--card);
+  padding: 20px;
+  width: 100vh;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+
+.panel4 {
+  background: var(--card);
+  padding: 20px;
+  width: 155vh;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead th {
+  background: #f8fafc;
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+tbody td {
+  padding: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+
+tbody tr:hover {
+  background: #fbfdff;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #e6edf3;
+}
+
+textarea:focus {
+  outline: none;
+  border: 2px solid #1e90ff;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.15);
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: #32cd32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #228b22;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  padding: 8px 16px;
+  font-size: 0.9em;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* Misc */
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #e0f7fa;
+  margin-left: 5px;
+}
+
+.loading {
+  text-align: center;
+  color: #0D5791;
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1rem;
+}
+
+
+/* //information tabs  */
+ body {
+      font-family: Arial, sans-serif;
+      background: #fcfcfc;
+      margin: 0;
+      padding: 30px;
+    }
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #aaa;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 12px 30px;
+      border: 1px solid #888;
+      border-bottom: none;
+      background: #eee;
+      cursor: pointer;
+      margin-right: 2px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    .tab.active {
+      background: #fff;
+      color: #3751ad;
+      border-bottom: 2px solid #fff;
+    }
+    .tabcontent {
+      border: 1px solid #888;
+      border-radius: 0 10px 10px 10px;
+      background: #fff;
+      padding: 24px;
+      min-height: 200px;
+      font-size: 18px;
+    }
+    .condition-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .condition-info {
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .panel4 {
+  background: #cce3ca
+
+;
+}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>HelpingHands — Dashboard</h1>
+        <div class="sub">Overview & Progress for Child Learning</div>
+      </div>
+      <div class="flex muted small">
+        Logged in as <strong id="loggedUser">Loading...</strong>
+        <form action="/logout" method="POST" style="margin: 0 0 0 20px; display: inline;">
+          <button type="submit" class="logout-btn">🔓 Logout</button>
+        </form>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="logo">Helping<span>Hands</span></div>
+        <nav class="nav">
+          <a href="#welcome">🏠 Home</a>
+          <a href="#progress">📊 Daily Routine</a>
+          <a href="learning.html">📝 Notes</a>
+          <a href="#modules">📚 Assignments-Tasks</a>
+          <a href="#">🖌️ My Work</a>
+          <a href="story.html">💡 Stories</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+
+        <!-- ✅ LOADING & ERROR STATE -->
+        <div id="loadingContainer" class="loading">⏳ Loading your profile...</div>
+
+        <!-- ✅ ERROR MESSAGE -->
+        <div id="errorContainer"></div>
+
+        <!-- ✅ USER INFO - FETCHED FROM DATABASE -->
+        <div id="userInfoContainer">
+          <div class="name">Hi Welcome! <span id="childName">____</span></div><br>
+          <div class="pname">Parent Name: <span id="parentNameValue">____</span></div><br>
+          <div class="condition">Diagnosis: <span id="diagnosisValue">____</span></div><br>
+        </div>
+
+        <!-- Summary Cards -->
+        <section class="top-cards">
+          <div class="card"><h3>Stars Earned</h3><p id="stars">28</p></div>
+          <div class="card"><h3>Time Spent</h3><p id="time">3h 45m</p></div>
+          <div class="card"><h3>Modules Completed</h3><p id="modulesCompleted">4</p></div>
+        </section>
+
+        <!-- Modules Table -->
+        <section id="modules" class="panel">
+          <h2 style="margin-top:0">Learning Modules</h2>
+          <div style="overflow:auto;border-radius:12px">
+            <table>
+              <thead>
+                <tr><th style="width:40px">#</th><th>Module Name</th><th>Status</th><th>Last Activity</th></tr>
+              </thead>
+              <tbody id="moduleTable">
+                <!-- Filled by JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="notes" class="panel">
+          <h2 style="margin-top:0">Parent Notes</h2>
+          <textarea placeholder="Write today's feedback..." id="parentNote"></textarea>
+          <button id="saveNoteBtn">Save Note</button>
+          <div id="savedNotes" class="muted"></div>
+        </section>
+
+        <!-- Suggestions Section -->
+        <section id="suggestions" class="panel3">
+          <h2 style="margin-top:0">💡 Suggested Next</h2>
+          <ul>
+            <li>📌 </li>
+            <li>📌 </li>
+            <li>📌 </li>
+          </ul>
+        </section>
+
+<!-- information about diagnosis -->
+        <section id="suggestions" class="panel4" >
+          <h2 style="margin-top:0">ℹ️ Information about Diagnosis</h2>
+        <div class="tabs">
+            <div class="tab active" onclick="showTab(0)">Autism</div>
+            <div class="tab" onclick="showTab(1)">ADHD</div>
+            <div class="tab" onclick="showTab(2)">Down Syndrome</div>
+            <div class="tab" onclick="showTab(3)">Dyslexia</div>
+            <div class="tab" onclick="showTab(4)">Dysgraphia</div>
+        </div>
+        <div class="tabcontent" id="tabcontent">
+            <div class="condition-title">Autism</div>
+            <div class="condition-info">
+            Information
+            </div>
+        </div>
+        <script>
+            const titles = [
+            "Autism",
+            "ADHD",
+            "Down Syndrome",
+            "Dyslexia",
+            "Dysgraphia"
+            ];
+        const infos = [
+        // Autism Spectrum Disorder
+        "Autism Spectrum Disorder (ASD)<br>" +
+        "Overview:<br>" +
+        "• ASD is a lifelong neurodevelopmental disorder affecting communication, behavior, and social interaction. It usually appears before age 3, though signs can emerge later. People with autism may have unique strengths in attention to detail, memory, or specific interests.<br>" +
+        "Risk Factors:<br>" +
+        "• Genetics, family history, advanced parental age, prenatal exposures (certain medications, toxins), and pregnancy complications.<br>" +
+        "Symptoms:<br>" +
+        "• Difficulty with verbal/nonverbal communication, limited eye contact, use of repetitive movements (such as hand-flapping), resistance to change, and intense fixation on specific interests. Sensory sensitivity (to light, sound, texture) is also common.<br>" +
+        "Diagnosis:<br>" +
+        "• Diagnosis involves observing behavior, developmental screening, and standardized tests (like ADOS), often with input from parents and teachers.<br>" +
+        "Measures You Can Take:<br>" +
+        "• Seek early intervention (Applied Behavior Analysis, speech therapy, occupational therapy).<br>" +
+        "• Use visual schedules and structured routines to reduce anxiety.<br>" +
+        "• Encourage social interaction and praise small progress.<br>" +
+        "• Involve professionals for individualized support.<br>" +
+        "• Monitor for co-occurring health issues.<br>" +
+        "Care Tips:<br>" +
+        "• Be patient and avoid overstimulation or sudden changes.<br>" +
+        "• Address sensory needs with appropriate tools (noise-cancelling headphones, soft lighting).<br>" +
+        "• Foster independence in daily activities.<br>" +
+        "• Promote access to support groups and educational resources.<br>" +
+        "• Medication may help with symptoms like anxiety, aggression, or attention issues (under doctor supervision).<br>" +
+        "Prognosis:<br>" +
+        "• Early and tailored interventions dramatically improve social, communication, and daily living skills. Many individuals thrive with ongoing treatment and family support.<br>",
+
+        // ADHD
+        "Attention Deficit Hyperactivity Disorder (ADHD)<br>" +
+        "Overview:<br>" +
+        "• ADHD is a neurodevelopmental disorder leading to persistent patterns of inattention, hyperactivity, and impulsivity that affects learning and behavior across settings.<br>" +
+        "Risk Factors:<br>" +
+        "• Genetics (family history of ADHD), premature birth, brain injury, exposure to tobacco/alcohol during pregnancy, low birth weight.<br>" +
+        "Symptoms:<br>" +
+        "• Difficulty staying focused and organized, forgetfulness, restlessness, frequent interrupting, excessive talking, trouble following instructions and finishing tasks.<br>" +
+        "Diagnosis:<br>" +
+        "• Diagnosis involves behavioral assessments, input from parents and teachers, and exclusion of other conditions.<br>" +
+        "Measures You Can Take:<br>" +
+        "• Provide a structured schedule and clear instructions.<br>" +
+        "• Use reminders and checklists for organization.<br>" +
+        "• Break tasks into smaller steps.<br>" +
+        "• Reward positive behavior and progress.<br>" +
+        "• Consider behavioral therapy and, if needed, prescribed medication (stimulants or non-stimulants).<br>" +
+        "Care Tips:<br>" +
+        "• Create quiet working spaces and allow movement breaks.<br>" +
+        "• Offer emotional encouragement and reduce distractions.<br>" +
+        "• Educate teachers and caregivers on ADHD needs.<br>" +
+        "• Support social skills through group activities.<br>" +
+        "Prognosis:<br>" +
+        "• Many children see improvements in symptoms with age and treatment, but ongoing support is often needed—especially for school and work success.<br>",
+
+        // Down Syndrome
+        "Down Syndrome<br>" +
+        "Overview:<br>" +
+        "• Down syndrome is a genetic condition caused by an extra copy of chromosome 21 (trisomy 21). It results in intellectual disabilities, characteristic facial features, and increased risks for certain health problems.<br>" +
+        "Risk Factors:<br>" +
+        "• Advanced maternal age is the primary risk; family history (rare); errors in cell division (nondisjunction, translocation, mosaicism).<br>" +
+        "Symptoms:<br>" +
+        "• Distinctive physical traits (flat facial profile, upward slanting eyes, small ears).<br>" +
+        "• Developmental delays (speech, motor skills), learning disability.<br>" +
+        "• Health issues: heart defects, hearing/vision loss, thyroid disorders, increased risk of infections and Alzheimer’s disease.<br>" +
+        "Diagnosis:<br>" +
+        "• Confirmed with genetic testing (prenatal via amniocentesis/chorionic villus sampling; postnatal by karyotype).<br>" +
+        "Measures You Can Take:<br>" +
+        "• Early intervention therapies (speech, occupational, physical).<br>" +
+        "• Regular medical screenings and prompt treatment of associated health problems.<br>" +
+        "• Individualized Education Plan (IEP) at school.<br>" +
+        "• Support social inclusion and self-care skills.<br>" +
+        "Care Tips:<br>" +
+        "• Encourage independence with daily routines.<br>" +
+        "• Provide opportunities for social interaction and community participation.<br>" +
+        "• Monitor for changes in health and communicate with healthcare professionals.<br>" +
+        "• Celebrate achievements and maintain positive reinforcement.<br>" +
+        "Prognosis:<br>" +
+        "• With improved medical care and support, life expectancy and independence have increased. Many individuals live semi-independent and fulfilling lives.<br>",
+
+        // Dyslexia
+        "Dyslexia<br>" +
+        "Overview:<br>" +
+        "• Dyslexia is a common learning disorder affecting reading, writing, and spelling. It is caused by differences in brain regions involved in language processing and usually persists lifelong.<br>" +
+        "Risk Factors:<br>" +
+        "• Genetic predisposition (runs in families), neurodevelopmental differences, premature birth, exposure to nicotine or alcohol in pregnancy.<br>" +
+        "Symptoms:<br>" +
+        "• Difficulty decoding and recognizing words, slow or inaccurate reading, poor spelling, challenges with understanding and following complex instructions.<br>" +
+        "• May accompany attention or memory issues.<br>" +
+        "Diagnosis:<br>" +
+        "• Diagnosed using educational, psychological, and language assessments after ruling out hearing or vision problems.<br>" +
+        "Measures You Can Take:<br>" +
+        "• Use multisensory teaching methods (visual, auditory, kinesthetic strategies).<br>" +
+        "• Allow extra time for reading and written tasks.<br>" +
+        "• Provide audiobooks, speech-to-text tools, and other assistive technology.<br>" +
+        "• Implement phonics-based interventions and regular practice.<br>" +
+        "Care Tips:<br>" +
+        "• Encourage progress and avoid negative labeling or criticism.<br>" +
+        "• Foster communication between parents, teachers, and child.<br>" +
+        "• Create a supportive home environment for reading practice.<br>" +
+        "• Promote strengths in other academic or creative areas.<br>" +
+        "Prognosis:<br>" +
+        "• With ongoing specialist support, most children and adults can succeed academically and professionally. Early help reduces frustration and emotional stress.<br>",
+
+        // Dysgraphia
+        "Dysgraphia<br>" +
+        "Overview:<br>" +
+        "• Dysgraphia is a neurological disorder marked by difficulties with handwriting, spelling, and organizing written ideas. It can co-occur with ADHD or other learning challenges.<br>" +
+        "Risk Factors:<br>" +
+        "• Family history, other learning disabilities, acquired brain injury, developmental differences in motor or language areas.<br>" +
+        "Symptoms:<br>" +
+        "• Messy, illegible handwriting; trouble forming letters; poor spelling and grammar; slow writing speed; difficulty planning and sequencing written work.<br>" +
+        "Diagnosis:<br>" +
+        "• Evaluated by occupational therapists, psychologists, and educators using fine motor and written expression assessments.<br>" +
+        "Measures You Can Take:<br>" +
+        "• Occupational therapy and fine motor skills training.<br>" +
+        "• Allow use of keyboards or speech-to-text software.<br>" +
+        "• Break writing into manageable steps with outlines and prompts.<br>" +
+        "• Provide extra time and flexible tools for assignments.<br>" +
+        "Care Tips:<br>" +
+        "• Encourage frequent low-pressure writing practice.<br>" +
+        "• Give positive feedback for effort and improvement.<br>" +
+        "• Manage frustration by offering alternatives and minimizing stress.<br>" +
+        "• Work closely with teachers and specialists for accommodations.<br>" +
+        "Prognosis:<br>" +
+        "• Symptoms can persist but targeted therapy and classroom support improve academic performance and self-confidence. Long-term adaptation allows most individuals to manage effectively.<br>"
+        ];
+
+
+
+    function showTab(index) {
+      document.querySelectorAll('.tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+      });
+      document.getElementById('tabcontent').innerHTML = `
+        <div class="condition-title">${titles[index]}</div>
+        <div class="condition-info">${infos[index]}</div>
+      `;
+    }
+  </script>
+          
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // ✅ FETCH USER PROFILE FROM DATABASE ON PAGE LOAD
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        console.log('📍 Dashboard loading...');
+        
+        const response = await fetch('/api/getUserProfile');
+        const data = await response.json();
+
+        console.log('📦 API Response:', data);
+
+        if (!response.ok) {
+          throw new Error(data.msg || 'Failed to load profile');
+        }
+
+        // ✅ Hide loading, show content
+        document.getElementById('loadingContainer').style.display = 'none';
+        document.getElementById('userInfoContainer').style.display = 'block';
+
+        // ✅ POPULATE USER DATA
+        const profile = data.profile;
+        
+        document.getElementById('loggedUser').textContent = profile.fullName || 'User';
+        document.getElementById('childName').textContent = profile.fullName || 'N/A';
+        document.getElementById('parentNameValue').textContent = profile.parentName || 'N/A';
+        document.getElementById('diagnosisValue').textContent = profile.diagnosis || 'N/A';
+
+        console.log('✅ Dashboard populated with data');
+
+      } catch (error) {
+        console.error('❌ Error:', error);
+        document.getElementById('loadingContainer').style.display = 'none';
+        document.getElementById('errorContainer').innerHTML = 
+          `<div class="error">⚠️ Error: ${error.message}</div>`;
+      }
+    });
+
+    // Demo data for modules
+    const modules = [
+      { name: 'Basics', status: 'Completed', last: '2025-11-01' },
+      { name: 'Creative Corner', status: 'In Progress', last: '2025-11-07' },
+      { name: 'Games', status: 'Not Started', last: '-' },
+      { name: 'Stories', status: 'Completed', last: '2025-10-28' }
+    ];
+
+    function renderModules() {
+      const tbody = document.getElementById('moduleTable');
+      tbody.innerHTML = '';
+      modules.forEach((m, i) => {
+        tbody.innerHTML += `<tr>
+          <td>${i+1}</td>
+          <td>${m.name}</td>
+          <td><span class="pill">${m.status}</span></td>
+          <td>${m.last}</td>
+        </tr>`;
+      });
+    }
+    renderModules();
+
+    // Save Note
+    document.getElementById('saveNoteBtn').onclick = function(){
+      const note = document.getElementById('parentNote').value;
+      localStorage.setItem('parentNote', note);
+      displayNote();
+    }
+
+    function displayNote(){
+      const saved = localStorage.getItem('parentNote');
+      document.getElementById('savedNotes').innerHTML = saved
+        ? '<strong>Saved Note:</strong> ' + saved
+        : '';
+    }
+    displayNote();
+  </script>
+</body>
+</html>

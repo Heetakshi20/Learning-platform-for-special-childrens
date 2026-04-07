@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+body {
+  background: linear-gradient(to top right, #FFDEE9, #B5FFFC);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Box Container */
+.container {
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 10;
+  animation: popIn 1s ease;
+}
+
+h2 {
+  text-align: center;
+  color: #0D5791;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 2px solid #0D5791;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #0D5791;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #0D5791;
+  transform: scale(1.05);
+}
+
+.toggle {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.toggle a {
+  color: #0D5791;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Floating bubbles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: float 8s infinite ease-in-out;
+  z-index: 1;
+}
+
+.bubble:nth-child(1) {
+  width: 60px; height: 60px;
+  top: 10%; left: 10%;
+  background: #f5a623;
+}
+.bubble:nth-child(2) {
+  width: 80px; height: 80px;
+  bottom: 20%; left: 30%;
+  background: #7ed6df;
+  animation-delay: 2s;
+}
+.bubble:nth-child(3) {
+  width: 40px; height: 40px;
+  top: 30%; right: 15%;
+  background: #e056fd;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+/* Cartoon Character */
+.cartoon-box {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.character {
+  width: 120px;
+  height: auto;
+  z-index: 2;
+}
+
+.speech {
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-left: 15px;
+  position: relative;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  border: 2px solid #0D5791;
+}
+
+.speech::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 10px solid transparent;
+  border-right-color: #fff;
+}
